@@ -1,5 +1,6 @@
 # Coconuts Vibes
 Coconuts Vibes is a discord music bot than support album playing and youtube download
+Note: Youtube Music is on None folder
 
 # Usage
 - Clone the repo
