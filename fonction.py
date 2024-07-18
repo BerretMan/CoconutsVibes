@@ -1,4 +1,4 @@
-from pytube import YouTube
+from pytube import YouTube, Playlist
 import csv,os,shutil
 import re
 
@@ -41,17 +41,25 @@ def remove_emojis(data):
 
 # check if a music is download
 def Is_File_Download(file_name):
-    for file in os.listdir("music/None"):
-        if file_name in file:
-            return True
-        else:
-            return False
+    if file_name in os.listdir("music/None"):
+        return True
+    else:
+        return False
         
 # Download youtube video with a link
 def download_yt(link):
     file_name=f"{link[-11:]}.mp3"
+
     if Is_File_Download(file_name):
-        pass
+        album_none=read_album_bdd("None")
+        i=0
+        #tant que la music n'est pas trouvé
+        while i < len(album_none) and album_none[i]["filename"]!=file_name:
+            i+=1
+        v=album_none[i]
+        m=Music(file_name,v["name"],"Youtube","None")
+        return m
+    #youtube download
     else:
         ytb = YouTube(link).streams.filter(only_audio=True).all()
         ytb[0].download(filename=f"music/None/{file_name}")

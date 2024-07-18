@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import sys
 from discord.ext import commands
 
 from fonction import *
@@ -10,6 +11,7 @@ bot.remove_command('help')
 playlist_lock = asyncio.Lock()
 music_queue = []
 
+kirby_gif="[Kirby_danse](https://cdn.discordapp.com/emojis/1011259075318784070.gif?size=128&quality=lossless)"
 #TOKEN
 
 with open("TOKEN.txt","r") as file:
@@ -17,7 +19,7 @@ with open("TOKEN.txt","r") as file:
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game("Music bot V2, by BerretMan"))
+    await bot.change_presence(status=discord.Status.online, activity=discord.Game("🌴Coconuts Vibes, by BerretMan"))
 
 
 @bot.command()
@@ -42,7 +44,7 @@ async def change_activites(status):
         elif status == "pause":
             message = f"⏸️ {music_queue[0].name}, by BerretMan"
     else:
-        message = f"TropicalSymphonie V2, by BerretMan"
+        message = f"🌴Coconuts Vibes, by BerretMan"
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(message))
 
 @bot.command()
@@ -64,7 +66,7 @@ async def start(ctx, path="music/None/"):
             music = music_queue[0]
             vc.play(discord.FFmpegPCMAudio(source=f"{path}{music.filename}"), after=lambda e: bot.loop.call_soon_threadsafe(next_song.set))
             await change_activites("play")
-            await ctx.send(f"Playing **{music.name}** by {music.author}")
+            await ctx.send(f"▶️ **{music.name}** by {music.author}")
 
             next_song = asyncio.Event()
             await next_song.wait()
@@ -108,14 +110,42 @@ async def album(ctx, album_name):
 async def add(ctx, link):
     music = download_yt(link)
     music_queue.append(music)
-    await ctx.send(f"{music.name} ajouté à la file")
+    await ctx.send(f"🎵{music.name} ajouté à la file")
 
+
+@bot.command()
+async def add_p(ctx,link):
+    playlist= Playlist(link)
+    await ctx.send(f"🎶Télécharge une playlist de {len(playlist)} titres")
+    i=1
+    for url in playlist:
+        music = download_yt(url)
+        music_queue.append(music)
+        if len(playlist)<8:
+            await ctx.send(f"🎵({i}/{len(playlist)}){music.name} ajouté à la file")
+        i+=1
+    await ctx.send(f"{kirby_gif} Playlist télécharger! Faites !start pour commencer à jouer la playlist")
 
 @bot.command()
 async def clear(ctx):
     clear_None()
     clear_bdd("Youtube")
-    await ctx.send(f"🗑️ La base de donnée a été clear")
+    await ctx.send(f"🗑️ La base de donnée a été clear \n 🔄restart")
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+@bot.command()
+async def q(ctx):
+    await ctx.send(f"Queue de {len(music_queue)} titres")
+    embed = discord.Embed(title="Musique dans la queue", description="Discord bot music, by BerretMan", color=0x00ff00)
+    i=1
+    if len(music_queue)<=10:
+
+        for music in music_queue:
+            embed.add_field(name=f"{music.name}", value=f"{i}/{len(music_queue)}", inline=False)
+    else:
+        for i in range(1,10):
+            embed.add_field(name=f"{music_queue[i-1].name}", value=f"{i}/{len(music_queue)}", inline=False)
+    await ctx.send(embed=embed)
 
 
 bot.run(TOKEN)
