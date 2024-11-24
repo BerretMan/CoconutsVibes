@@ -9,7 +9,7 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 bot.remove_command('help')
 playlist_lock = asyncio.Lock()
-playlist_lock = asyncio.Lock()
+global vc
 music_queue = []
 
 kirby_gif="[Kirby_danse](https://cdn.discordapp.com/emojis/1011259075318784070.gif?size=128&quality=lossless)"
@@ -25,7 +25,7 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title="Tropical Symphonie V2", description="Discord bot music, by BerretMan", color=0x00ff00)
+    embed = discord.Embed(title="🌴Coconuts Vibes, by BerretMan", description="Discord bot music, by BerretMan", color=0x00ff00)
     embed.add_field(name="!join", value="Rejoins le vocal", inline=False)
     embed.add_field(name="!add", value="Ajoute une music à la playlist", inline=False)
     embed.add_field(name="!start", value="Joue la playlist", inline=False)
@@ -38,7 +38,7 @@ async def help(ctx):
 
 async def change_activites(status):
     if status == "idle":
-        message = f"TropicalSymphonie V2, by BerretMan"
+        message = f"🌴Coconuts Vibes, by BerretMan"
     elif len(music_queue) > 0:
         if status == "play":
             message = f"▶️ {music_queue[0].name}, by BerretMan"
