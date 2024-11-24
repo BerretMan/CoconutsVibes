@@ -1,7 +1,7 @@
 import csv,os,shutil
 import re
 import ssl
-from pytube import YouTube
+from pytube import YouTube,Playlist
 from pytube import request
 from pytube import extract
 from pytube.innertube import _default_clients
