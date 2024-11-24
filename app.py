@@ -9,6 +9,7 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 bot.remove_command('help')
 playlist_lock = asyncio.Lock()
+playlist_lock = asyncio.Lock()
 music_queue = []
 
 kirby_gif="[Kirby_danse](https://cdn.discordapp.com/emojis/1011259075318784070.gif?size=128&quality=lossless)"
