@@ -86,7 +86,7 @@ def remove_emojis(data):
 
 # check if a music is download
 def Is_File_Download(file_name):
-    if file_name in os.listdir("music/None"):
+    if file_name in os.listdir("music/Song"):
         return True
     else:
         return False
@@ -96,23 +96,23 @@ def download_yt(link):
     file_name=f"{link[-11:]}.mp3"
 
     if Is_File_Download(file_name):
-        album_none=read_album_bdd("None")
+        album_song=read_album_bdd("Song")
         i=0
         #tant que la music n'est pas trouvé
-        while i < len(album_none) and album_none[i]["filename"]!=file_name:
+        while i < len(album_song) and album_song[i]["filename"]!=file_name:
             i+=1
-        v=album_none[i]
-        m=Music(file_name,v["name"],"Youtube","None")
+        v=album_song[i]
+        m=Music(file_name,v["name"],"Youtube","Song")
         return m
     #youtube download
     else:
-        ytb = YouTube(link).streams.filter(only_audio=True).all()
-        ytb[0].download(filename=f"music/None/{file_name}")
+        ytb = YouTube(link).streams.filter(only_audio=True)
+        ytb[0].download(filename=f"music/Song/{file_name}")
 
         print(f"file_name {file_name} \n titre: {remove_emojis(ytb[0].title)}")
         add_bdd(file_name,remove_emojis(ytb[0].title),"Youtube")
 
-        m=Music(file_name,remove_emojis(ytb[0].title),"Youtube","None")
+        m=Music(file_name,remove_emojis(ytb[0].title),"Youtube","Song")
         return m
 
 # play album 
@@ -127,8 +127,8 @@ def play_album(album_name):
         return False
 
 
-def clear_None():
-    folder = 'music/None'
+def clear_Song():
+    folder = 'music/Song'
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -146,7 +146,7 @@ def clear_None():
 def add_bdd(filename,name,author):
     with open("bdd.csv", 'a', newline='',encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow([filename,name,author,"None"])
+        writer.writerow([filename,name,author,"Song"])
 
 
 
