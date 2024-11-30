@@ -11,7 +11,7 @@
 - 📂 Manage your music collection with a simple database system.  
 ##  📝 **Commands list**
 
-<img src="image/command_list.png" alt="Coconuts Vibes Logo" width="200"/>  
+<img src="image/command_list.png" alt="Coconuts Vibes Logo" width="600"/>  
 
 ---
 
