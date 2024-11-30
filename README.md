@@ -9,6 +9,9 @@
 - 📀 Play entire albums directly via Discord bot.  
 - 🎵 Download music directly from YouTube.  
 - 📂 Manage your music collection with a simple database system.  
+##  📝 **Commands list**
+
+<img src="image/command_list.png" alt="Coconuts Vibes Logo" width="200"/>  
 
 ---
 
