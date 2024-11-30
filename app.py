@@ -9,12 +9,12 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 bot.remove_command('help')
 playlist_lock = asyncio.Lock()
+
 global vc
+vc = None
 music_queue = []
 
-kirby_gif="[Kirby_danse](https://cdn.discordapp.com/emojis/1011259075318784070.gif?size=128&quality=lossless)"
 #TOKEN
-
 with open("TOKEN.txt","r") as file:
     TOKEN=file.read()
 
@@ -32,6 +32,7 @@ async def help(ctx):
     embed.add_field(name="!pause", value="Met en pause la music", inline=False)
     embed.add_field(name="!unpause", value="Stop la pause", inline=False)
     embed.add_field(name="!next", value="Passe à la musique suivante", inline=False)
+    embed.add_field(name="!q", value="Affiche la queue actuelle", inline=False)
     embed.add_field(name="!album(album, numéro)", value="Joue une music d'un album. Si i=-1, joue tout l'album", inline=False)
     await ctx.send(embed=embed)
 
@@ -61,7 +62,7 @@ async def play_a_music(ctx, music):
     await change_activites("play")
 
 @bot.command()
-async def start(ctx, path="music/None/"):
+async def start(ctx, path="music/Song/"):
     async with playlist_lock:
         while len(music_queue) > 0:
             music = music_queue[0]
@@ -125,27 +126,26 @@ async def add_p(ctx,link):
         if len(playlist)<8:
             await ctx.send(f"🎵({i}/{len(playlist)}){music.name} ajouté à la file")
         i+=1
-    await ctx.send(f"{kirby_gif} Playlist télécharger! Faites !start pour commencer à jouer la playlist")
+    await ctx.send(f"Playlist télécharger! Faites !start pour commencer à jouer la playlist")
 
 @bot.command()
 async def clear(ctx):
-    clear_None()
-    clear_bdd("Youtube")
-    await ctx.send(f"🗑️ La base de donnée a été clear \n 🔄restart")
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    if vc.is_playing() or vc.is_paused or music_queue!=None:
+        await ctx.send("❌ Impossible de clear lorsque le bot joue de la musique ou que la queue n'est pas vide")
+    else:
+        clear_Song()
+        clear_bdd("Youtube")
+        await ctx.send(f"🗑️ La base de donnée a été clear \n 🔄restart")
+        os.execl(sys.executable, sys.executable, *sys.argv)
 
 @bot.command()
 async def q(ctx):
-    await ctx.send(f"Queue de {len(music_queue)} titres")
-    embed = discord.Embed(title="Musique dans la queue", description="Discord bot music, by BerretMan", color=0x00ff00)
+    embed = discord.Embed(title=f"Il y a {len(music_queue)} musiques dans la queue", description="🌴Coconuts Vibes, by BerretMan", color=0x00ff00)
     i=1
-    if len(music_queue)<=10:
-
-        for music in music_queue:
-            embed.add_field(name=f"{music.name}", value=f"{i}/{len(music_queue)}", inline=False)
-    else:
-        for i in range(1,10):
-            embed.add_field(name=f"{music_queue[i-1].name}", value=f"{i}/{len(music_queue)}", inline=False)
+    max_music_len= min(len(music_queue),10)
+    for i in range(max_music_len):
+        music = music_queue[i]
+        embed.add_field(name=f"{music.name}", value=f"{i + 1}/{len(music_queue)}", inline=False)
     await ctx.send(embed=embed)
 
 
