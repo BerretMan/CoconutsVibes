@@ -2,7 +2,7 @@
 <img src="image/logo.png" alt="Coconuts Vibes Logo" width="200"/>  
 
 🌴 **Coconuts Vibes**  is a Discord music bot than supports album playing and youtube downloads.
-> **Note**: Music downloaded from YouTube is stored in the `None` folder.
+> **Note**: Music downloaded from YouTube is stored in the `Song` folder.
 
 ---
 ## 🚀 **Features**  
