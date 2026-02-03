@@ -1,6 +1,6 @@
 ![Language](https://img.shields.io/badge/Language-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Version](https://img.shields.io/badge/Version-2.0-yellow?style=for-the-badge)
-![Size](https://img.shields.io/github/repo-size/TON_PSEUDO/TON_REPO?color=red&label=Size)
+![Size](https://img.shields.io/github/repo-size/BerretMan/CoconutsVibes?color=red&label=Size)
 # 🌴 **Coconuts Vibes** 
 <img src="image/logo.png" alt="Coconuts Vibes Logo" width="200"/>  
 
