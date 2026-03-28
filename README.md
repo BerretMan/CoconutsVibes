@@ -6,7 +6,8 @@
 <p align="center">
 <img src="image/logo.png" alt="Coconuts Vibes Logo" width="200"/>  
 </p>
-**Coconuts Vibes**  is a Discord music bot that scrapes Youtube or Google Drive music to play on Discord voice channel.
+
+**Coconuts Vibes** is a Discord music bot that scrapes Youtube or Google Drive music to play on Discord voice channel.
 
 ## Dependencies
 - **Discord.py** For the Discord API wrapper and Slash Commands
