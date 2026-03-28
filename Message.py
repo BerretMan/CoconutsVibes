@@ -1,29 +1,28 @@
 class Message:
     def __init__(self):
-        self.welcome = f"🌴Coconuts Vibes V2, by BerretMan"
+        self.welcome = "🌴 Coconuts Vibes V2, by BerretMan"
 
-        self.joinChannel  ="Channel rejoint." 
-        self.leaveChannel ="Channel quitté."
-        self.noChannel = "⚠️ERREUR⚠️: vous n'êtes dans aucun channel."
-        self.downloading = "Téléchargment en cours... "
-        self.download = "Le téléchargement est terminé"
+        self.joinChannel = "Joined the voice channel." 
+        self.leaveChannel = "Left the voice channel."
+        self.noChannel = "⚠️ ERROR ⚠️: You are not in a voice channel."
+        self.downloading = "Downloading... please wait."
+        self.download = "Download complete!"
         
-        self.noMusic = "Il n'y a pas de musique dans la playlist."
+        self.noMusic = "The playlist is currently empty."
 
-        self.pause = "La musique est en pause."
-        self.play = "La musique reprends."
+        self.pause = "Music paused."
+        self.play = "Music resumed."
 
-        self.x1 = " La musique est joué en x1."
-        self.x2 = " La musique est joué en x2."
+        self.x1 = "Playback speed set to 1x."
+        self.x2 = "Playback speed set to 2x."
 
-        #commande 
-        self.fjoin = "CoconutsVibes rejoint le channel"
-        self.fleave = "CoconutsVibes quitte le channel"
-        self.fadd = "Ajoute une musique dans la playlist" 
-        self.fstart = "Lance les musiques contenus dans la playlist de CoconutsVibes"
-        self.fgoto = "Avance la musique au timecode souhaité"
-        self.fqueue = "Affiche la playlist"
+        # Slash Command description
+        self.fjoin = "CoconutsVibes joins the voice channel"
+        self.fleave = "CoconutsVibes leaves the voice channel"
+        self.fadd = "Add a song to the playlist" 
+        self.fstart = "Start playing songs from the CoconutsVibes playlist"
+        self.fgoto = "Jump to a specific timestamp in the song"
+        self.fqueue = "Show the current playlist"
 
-    
-    def next(self,music_name):
-        return f"{music_name} est maintenant joué!"
+    def next(self, music_name):
+        return f"Now playing: **{music_name}**!"
