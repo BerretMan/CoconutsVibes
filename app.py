@@ -11,7 +11,8 @@ from copy import deepcopy
 
 
 MUSIC_FILE = File()
-ID = 908732286978113568
+# Your discord server ID here 
+ID = 0
 GUILD_ID = discord.Object(id=ID)
 
 
