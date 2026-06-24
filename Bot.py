@@ -27,8 +27,7 @@ class Bot(commands.Bot):
 
             print(e)
 
-
-    async def on_message(self,message):
+    print("hello world"d def on_message(self,message):
         if message.author == self.user:
             return
 
