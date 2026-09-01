@@ -1,1 +1,4 @@
 KEYS
+__pycache__/
+Music/
+.venv/

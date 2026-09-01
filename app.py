@@ -118,6 +118,7 @@ async def add(interaction: discord.Interaction, music: str):
 def play_next(error=None):
     if not MUSIC_FILE.est_vide() and not bot.isGoto:
         music = MUSIC_FILE.defiler()
+        bot.current_music = music
         bot.vc.play(
             discord.FFmpegPCMAudio(source=f"Music/Youtube/{music}"), after=play_next
         )
@@ -135,7 +136,7 @@ async def start(interaction: discord.Interaction):
         bot.vc.play(
             discord.FFmpegPCMAudio(source=f"Music/Youtube/{music}"), after=play_next
         )
-        view = Button(bot.vc, MUSIC_FILE, music)
+        view = Button(bot, MUSIC_FILE)
         music_name = music.split("@")[1].replace(".mp3", "")
         await interaction.response.send_message(
             f"{music_name} play", view=view, ephemeral=True
